@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inbox{% endblock %}
+
+{% block body %}
+    <section class="page-header">
+        <h1>Inbox</h1>
+        <p>Je ontvangen berichten, nieuwste bovenaan.</p>
+    </section>
+
+    <section class="cards">
+        {% for message in messages %}
+            <article class="card">
+                <h2>Van: {{ message.sender.fullName ?: message.sender.email }}</h2>
+                <p class="muted">{{ message.createdAt|date('d-m-Y H:i') }}</p>
+                <p>{{ message.content|nl2br }}</p>
+            </article>
+        {% else %}
+            <p>Je hebt nog geen berichten ontvangen.</p>
+        {% endfor %}
+    </section>
+{% endblock %}

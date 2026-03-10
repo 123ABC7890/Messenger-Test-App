@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Publiek profiel{% endblock %}
+
+{% block body %}
+    <section class="page-header">
+        <h1>{{ profileUser.fullName ?: profileUser.email }}</h1>
+        <p>Publiek profiel</p>
+    </section>
+
+    <section class="panel">
+        <p><strong>E-mailadres:</strong> {{ profileUser.email }}</p>
+        <p><strong>Vaardigheden:</strong> {{ profileUser.skills ?: 'Nog niet ingevuld' }}</p>
+    </section>
+{% endblock %}

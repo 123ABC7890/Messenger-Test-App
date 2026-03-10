@@ -1,3 +1,150 @@
+:root {
+    --bg: #f7f3ea;
+    --ink: #1f2937;
+    --accent: #a33b20;
+    --accent-dark: #742812;
+    --panel: #fffdf8;
+    --line: #e5d8c6;
+    --ok: #0e7a4b;
+    --error: #9a1f2b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: skyblue;
+    margin: 0;
+    color: var(--ink);
+    background: radial-gradient(circle at top right, #f3e8d8, var(--bg) 45%);
+    font-family: "Segoe UI", "Trebuchet MS", sans-serif;
+}
+
+a {
+    color: var(--accent);
+}
+
+.app-header {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+}
+
+.app-nav {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.brand {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.container {
+    max-width: 980px;
+    margin: 1.2rem auto;
+    padding: 0 1rem 2rem;
+}
+
+.page-header h1 {
+    margin-bottom: 0.2rem;
+}
+
+.page-header p,
+.muted {
+    color: #6b7280;
+}
+
+.flash {
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    margin-bottom: 0.8rem;
+    border: 1px solid;
+}
+
+.flash-success {
+    background: #ecfdf3;
+    border-color: #8dd7af;
+    color: var(--ok);
+}
+
+.flash-error {
+    background: #fff1f2;
+    border-color: #f0a6af;
+    color: var(--error);
+}
+
+.search-form,
+.stack-form {
+    display: grid;
+    gap: 0.7rem;
+}
+
+.search-form {
+    grid-template-columns: 1fr auto;
+    margin: 1rem 0;
+}
+
+input,
+textarea,
+select,
+button {
+    font: inherit;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    padding: 0.65rem 0.8rem;
+}
+
+button {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+button:hover {
+    background: var(--accent-dark);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+
+.card,
+.panel,
+.auth-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1rem;
+}
+
+.auth-card {
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+    .search-form {
+        grid-template-columns: 1fr;
+    }
 }
