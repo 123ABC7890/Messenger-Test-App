@@ -23,11 +23,10 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        $impersonate = Action::new('impersonate', 'Impersonate', 'fas fa-user-secret')
+        $impersonate = Action::new('impersonate', 'Inloggen als', 'fas fa-user-secret')
             ->linkToRoute('app_admin_user_impersonate', static fn (User $user): array => ['id' => $user->getId()])
-            ->displayIf(static function (User $user): bool {
-                return !$user->isBlocked() && !in_array('ROLE_ADMIN', $user->getRoles(), true);
-            });
+            ->renderAsLink()
+            ->asPrimaryAction();
 
         return $actions
             ->add(Crud::PAGE_INDEX, $impersonate)

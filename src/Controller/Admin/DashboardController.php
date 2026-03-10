@@ -34,18 +34,6 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin/impersonate/{id}', name: 'app_admin_user_impersonate', requirements: ['id' => '\\d+'])]
     public function impersonate(User $user): Response
     {
-        if ($user->isBlocked()) {
-            $this->addFlash('error', 'Geblokkeerde gebruikers kunnen niet worden ge\u00efmpersoneerd.');
-
-            return $this->redirectToRoute('admin_user_index');
-        }
-
-        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
-            $this->addFlash('error', 'Andere administrators kunnen niet worden ge\u00efmpersoneerd.');
-
-            return $this->redirectToRoute('admin_user_index');
-        }
-
         return $this->redirectToRoute('app_home', [
             '_switch_user' => $user->getEmail(),
         ]);
