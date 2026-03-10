@@ -45,7 +45,7 @@ class RegistrationFormType extends AbstractType
             ])
         ;
     }
-php bin/console make:admin:dashboard
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
