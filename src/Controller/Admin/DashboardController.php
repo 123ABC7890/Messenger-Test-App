@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\IsGranted;
+use Symfony\Component\Routing\Attribute\Route;
 
 #[AdminDashboard(routePath: '/admin', routeName: 'admin')]
 #[IsGranted('ROLE_ADMIN')]
@@ -28,6 +29,26 @@ class DashboardController extends AbstractDashboardController
             ->generateUrl();
 
         return $this->redirect($url);
+    }
+
+    #[Route('/admin/impersonate/{id}', name: 'app_admin_user_impersonate', requirements: ['id' => '\\d+'])]
+    public function impersonate(User $user): Response
+    {
+        if ($user->isBlocked()) {
+            $this->addFlash('error', 'Geblokkeerde gebruikers kunnen niet worden ge\u00efmpersoneerd.');
+
+            return $this->redirectToRoute('admin_user_index');
+        }
+
+        if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+            $this->addFlash('error', 'Andere administrators kunnen niet worden ge\u00efmpersoneerd.');
+
+            return $this->redirectToRoute('admin_user_index');
+        }
+
+        return $this->redirectToRoute('app_home', [
+            '_switch_user' => $user->getEmail(),
+        ]);
     }
 
     public function configureDashboard(): Dashboard
